@@ -2,6 +2,17 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.footer {
+    font-family: "Courier New", Courier, monospace;
+    margin-top: 40px;
+    font-size:14px;
+    text-align:center;
+   }
+
+   .footer a {
+    color:#000;
+   }
+
 .container {
     max-width: 400px;
     margin: 40px auto;
