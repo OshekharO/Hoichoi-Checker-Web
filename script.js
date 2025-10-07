@@ -8,6 +8,9 @@ form.addEventListener('submit', (e) => {
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
 
+    // Show loading state
+    resultDiv.innerHTML = '<p class="loading">Checking account...</p>';
+
     fetch('https://prod-api.viewlift.com/identity/signin?site=hoichoitv&deviceId=browser-8dad7421-d550-76e6-193b-43da822a6038', {
         method: 'POST',
         headers: {
@@ -21,7 +24,14 @@ form.addEventListener('submit', (e) => {
         if (data.error) {
             resultDiv.innerHTML = `<p class="error">${data.error}</p>`;
         } else {
-            resultDiv.innerHTML = `<p>Name: ${data.name}</p><p>Email is valid!</p> <p>Subscribed: ${data.isSubscribed}</p>`;
+            resultDiv.innerHTML = `
+                <div class="success">
+                    <p><strong>Name:</strong> ${data.name || 'N/A'}</p>
+                    <p><strong>Email:</strong> ${data.email || email}</p>
+                    <p><strong>Subscribed:</strong> ${data.isSubscribed ? 'Yes' : 'No'}</p>
+                    <p class="valid">✓ Account is valid!</p>
+                </div>
+            `;
         }
     })
    .catch((error) => {
